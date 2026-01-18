@@ -81,7 +81,7 @@ main {
 }
 
 #books-grid {
-  padding: 1rem;
+  padding: 2rem;
   display: grid;
   /* grid-template-columns: 1fr 1fr 1fr; */
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -152,6 +152,7 @@ main {
 @media (max-width: 900px) {
   #books-grid {
     display: block;
+    padding: 1rem;
   }
 
   .card {
