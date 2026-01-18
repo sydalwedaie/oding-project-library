@@ -1,0 +1,162 @@
+/* Resets */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body,
+h1,
+h2,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg_dim: #232a2e;
+  --bg0: #2d353b;
+  --bg1: #343f44;
+  --bg2: #3d484d;
+  --bg3: #475258;
+  --bg4: #4f585e;
+  --bg5: #56635f;
+
+  --bg_visual: #543a48;
+  --bg_red: #514045;
+  --bg_yellow: #4d4c43;
+  --bg_green: #425047;
+  --bg_blue: #3a515d;
+  --bg_purple: #4a444e;
+
+  --fg: #d3c6aa;
+  --red: #e67e80;
+  --orange: #e69875;
+  --yellow: #dbbc7f;
+  --green: #a7c080;
+  --aqua: #83c092;
+  --blue: #7fbbb3;
+  --purple: #d699b6;
+  --grey0: #7a8478;
+  --grey1: #859289;
+  --grey2: #9da9a0;
+
+  --statusline1: #a7c080;
+  --statusline2: #d3c6aa;
+  --statusline3: #e67e80;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  background-color: var(--bg0);
+  color: var(--fg);
+}
+
+header {
+  background-color: var(--bg_dim);
+  text-align: center;
+  padding: 3rem;
+}
+
+main {
+}
+
+.add-book {
+  text-align: center;
+  button {
+    background-color: var(--aqua);
+    border: 0;
+    padding: 1rem 2rem;
+    border-radius: 0.4rem;
+    transform: translateY(-50%);
+    color: var(--bg_green);
+    font-size: 1.3em;
+    cursor: pointer;
+    box-shadow: 0 7px 14px 0 var(--bg_dim);
+  }
+}
+
+#books-grid {
+  padding: 1rem;
+  display: grid;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  container-type: inline-size;
+  container-name: card;
+  background-color: var(--bg1);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  box-shadow: 0 7px 14px 0 var(--bg_dim);
+  border: 1px solid var(--bg2);
+}
+
+.cover {
+  overflow: hidden;
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  p {
+    color: #cfcfcf;
+    @container card (min-width: 470px) {
+      font-size: 1.3rem;
+    }
+  }
+  p:last-of-type {
+    margin-bottom: 1rem;
+  }
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.card-footer {
+  margin-top: auto;
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    background-color: var(--bg0);
+    padding: 0.5rem 1rem;
+    border: 0;
+    color: white;
+    border-radius: 0.4rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--bg_dim);
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  #books-grid {
+    display: block;
+  }
+
+  .card {
+    max-width: 550px;
+    margin-bottom: 1rem;
+    margin-inline: auto;
+  }
+}
