@@ -97,7 +97,7 @@ main {
   border-radius: 0.4rem;
   overflow: hidden;
   box-shadow: 0 7px 14px 0 var(--bg_dim);
-  border: 1px solid var(--bg2);
+  border: 1px solid var(--fg);
 }
 
 .cover {
@@ -158,5 +158,28 @@ main {
     max-width: 550px;
     margin-bottom: 1rem;
     margin-inline: auto;
+  }
+}
+
+dialog {
+  border: 1px solid var(--fg);
+  border-radius: 0.4rem;
+  background-color: var(--bg3);
+  padding: 2rem;
+  color: var(--fg);
+
+  &::backdrop {
+    backdrop-filter: blur(2px);
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  input {
+    padding: 0.25rem 0.5rem;
+    margin-block: 0.25rem;
+    background-color: var(--fg);
+    border: 0;
   }
 }
