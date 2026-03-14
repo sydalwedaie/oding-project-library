@@ -1,14 +1,18 @@
 // Library mechanism logic
 const myLibrary = [];
 
-function Book(title, author, pages, read, coverURL, id) {
-  if (!new.target) throw Error("Use new to create objects!");
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.coverURL = coverURL;
-  this.id = id;
+class Book {
+  constructor(title, author, pages, read, coverURL, id) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.coverURL = coverURL;
+    this.id = id;
+  }
+  toggleRead() {
+    this.read = !this.read;
+  }
 }
 
 function addBookToLibrary(title, author, pages, read, coverURL) {
@@ -72,11 +76,6 @@ function displayBooks(library) {
   const booksGrid = document.getElementById("books-grid");
   booksGrid.innerHTML = "";
   library.forEach((book) => {
-    // for (key in book) {
-    //   console.log(`${key}: ${book[key]}`);
-    // }
-    // console.log("----------------");
-
     const card = createCard(book);
     booksGrid.append(card);
   });
@@ -94,6 +93,7 @@ function createCard(book) {
   const cardFooter = document.createElement("footer");
   const btnEdit = document.createElement("button");
   const btnDelete = document.createElement("button");
+  const btnToggle = document.createElement("button");
 
   card.classList.add("card");
   cover.classList.add("cover");
@@ -105,6 +105,7 @@ function createCard(book) {
   cardFooter.classList.add("card-footer");
   btnEdit.classList.add("btn-edit");
   btnDelete.classList.add("btn-delete");
+  btnToggle.classList.add("btn-toggle");
 
   img.src = book.coverURL;
 
@@ -114,12 +115,14 @@ function createCard(book) {
   read.textContent = book.read ? "Read" : "Not read";
   btnEdit.textContent = "Edit";
   btnDelete.textContent = "Delete";
+  btnToggle.textContent = book.read ? "Toggle Not Read" : "Toggle Read";
 
   btnEdit.dataset.bookId = book.id;
   btnDelete.dataset.bookId = book.id;
+  btnToggle.dataset.bookId = book.id;
 
   cover.append(img);
-  cardFooter.append(btnEdit, btnDelete);
+  cardFooter.append(btnEdit, btnDelete, btnToggle);
   info.append(title, author, pages, read, cardFooter);
   card.append(cover, info);
 
@@ -162,6 +165,15 @@ document.addEventListener("click", (e) => {
     form.elements["book-pages"].value = myLibrary[bookIndex].pages;
     form.elements["book-read"].checked = myLibrary[bookIndex].read;
     form.elements["book-cover"].value = myLibrary[bookIndex].coverURL;
+  }
+
+  // Toggle
+  if (e.target.classList[0] === "btn-toggle") {
+    const bookId = e.target.dataset.bookId;
+    const bookIndex = findBook(bookId);
+    console.log(bookIndex);
+    myLibrary[bookIndex].toggleRead();
+    displayBooks(myLibrary);
   }
 });
 
