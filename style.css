@@ -68,12 +68,12 @@ main {
 .add-book {
   text-align: center;
   button {
-    background-color: var(--aqua);
+    background-color: var(--fg);
     border: 0;
     padding: 1rem 2rem;
     border-radius: 0.4rem;
     transform: translateY(-50%);
-    color: var(--bg_green);
+    color: var(--bg0);
     font-size: 1.3em;
     cursor: pointer;
     box-shadow: 0 7px 14px 0 var(--bg_dim);
@@ -97,7 +97,7 @@ main {
   border-radius: 0.4rem;
   overflow: hidden;
   box-shadow: 0 7px 14px 0 var(--bg_dim);
-  border: 1px solid var(--fg);
+  border: 2px solid var(--fg);
 }
 
 .cover {
