@@ -1,3 +1,5 @@
+import someBooks from "./data.js";
+
 // Library mechanism logic
 class Book {
   constructor(title, author, pages, read, cover, id) {
@@ -107,14 +109,14 @@ class LibraryView {
     btnToggle.dataset.bookId = book.id;
 
     cover.append(img);
-    cardFooter.append(btnEdit, btnDelete, btnToggle);
+    cardFooter.append(btnToggle, btnEdit, btnDelete);
     info.append(title, author, pages, read, cardFooter);
     card.append(cover, info);
 
     return card;
   }
 
-  showModal(type, bookData) {
+  showModal(type, book) {
     if (type === "add") {
       this.dialogIsAdd = true;
       this.dialogHeadingEl.textContent = "Add a new book";
@@ -125,13 +127,12 @@ class LibraryView {
       this.dialogIsAdd = false;
       this.dialogHeadingEl.textContent = "Edit this book";
       this.dialogEl.showModal();
-
-      this.formEl.dataset.bookId = bookData.id;
-      this.formEl.elements["book-title"].value = bookData.title;
-      this.formEl.elements["book-author"].value = bookData.author;
-      this.formEl.elements["book-pages"].value = bookData.pages;
-      this.formEl.elements["book-read"].checked = bookData.read;
-      this.formEl.elements["book-cover"].value = bookData.cover;
+      this.formEl.dataset.bookId = book.id;
+      this.formEl.elements["book-title"].value = book.title;
+      this.formEl.elements["book-author"].value = book.author;
+      this.formEl.elements["book-pages"].value = book.pages;
+      this.formEl.elements["book-read"].checked = book.read;
+      this.formEl.elements["book-cover"].value = book.cover;
     }
   }
 }
@@ -143,45 +144,14 @@ class LibraryController {
   }
 
   loadDummyData() {
-    const someBooks = [
-      [
-        "To Kill a Mockingbird",
-        "Harper Lee",
-        "281",
-        true,
-        "https://covers.openlibrary.org/b/id/15153500-M.jpg",
-      ],
-      ["1984", "George Orwell", "328", false, "https://placehold.co/180x300"],
-      [
-        "The Great Gatsby",
-        "F. Scott Fitzgerald",
-        "180",
-        true,
-        "https://placehold.co/180x300",
-      ],
-      [
-        "Sapiens: A Brief History of Humankind",
-        "Yuval Noah Harari",
-        "498",
-        false,
-        "https://placehold.co/180x300",
-      ],
-      [
-        "The Alchemist",
-        "Paulo Coelho",
-        "208",
-        true,
-        "https://covers.openlibrary.org/b/id/15121528-M.jpg",
-      ],
-    ];
-
     someBooks.forEach((book) => {
-      this.model.addBook(book[0], book[1], book[2], book[3], book[4]);
+      this.model.addBook(...book);
     });
   }
 
   init() {
     this.view.displayBooks(this.model.library);
+
     // Card Delete/Edit/Toggle logic
     document.addEventListener("click", (e) => {
       // Add
